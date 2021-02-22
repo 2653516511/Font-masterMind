@@ -36,6 +36,8 @@ const reverseString = (arr) => {
 }
 
 console.log(reverseString(['h', 'e', 'l', 'l', 'o']));
+// let s = [1,2,5,3,2,4,5]
+// console.log(s.sort(), s);
 
 /**
  * 1. 2. 时间复杂度O(n)，空间复杂度O(1)
