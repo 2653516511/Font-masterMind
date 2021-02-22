@@ -43,6 +43,7 @@ const myAtoi = (str) => {
     
         // 3. 直接使用正则表达式
     let res = str.match(/^(-|\+)?\d+/g)
+    console.log(res);
     res = Number(res)
 
     // 返回值 number
@@ -52,11 +53,15 @@ const myAtoi = (str) => {
     return 0
 }
 
-console.log(myAtoi('   -42 o6w'));
+console.log(myAtoi('   42 o6w'));
+let re = /\d+/g;
+let str = '42 o6w';
+let result = str.match(re);
+console.log(result);  // ["2016", "01", "02"]
 
 /**
  * 1. 时空复杂度O(1)
  * 2. 时间复杂度
- * 3. 时间复杂度O(1)：代码执行的时候，运行的事件不随某个变量的增长而增长；
+ * 3. 时间复杂度O(1)：代码执行的时候，运行的时间不随某个变量的增长而增长；
  *    空间复杂度O(1)
  */
