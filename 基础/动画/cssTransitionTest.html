@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1{
+            height:15px;
+            width:15px;
+            background-color: burlywood;
+            transition: 1s height, width 2s 1s cubic-bezier(.83,.97,.05,1.44);
+            
+            /* transition-property: width;      某一属性
+            transition-duration: 2s;            动画持续时间
+            transition-delay: 1s;               动画推迟时间
+            transition-timing-function: ease-in-out;        状态变化速度，默认不是匀速的，而是逐渐变慢，即ease
+            */
+        }
+
+        #div1:hover{
+            height: 150px;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

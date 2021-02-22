@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            height:150px;
+            width:150px;
+            background-color: burlywood;
+            animation: 1s rainbow linear 1s 3 alternate;
+            /* 鼠标没有悬停时，动画暂停 */
+            animation-play-state: paused;
+        }
+        #div1:hover {
+            /* 鼠标悬停，动画继续播放 */
+            animation-play-state: running;
+        }
+        @keyframes rainbow {
+            0% { background-color: red;}
+            50% { background-color: yellow; transform: scale(1.2);}
+            to { background-color: blue;}
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

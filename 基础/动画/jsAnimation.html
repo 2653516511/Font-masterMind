@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 150px;
+            height: 150px;
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+
+    <script>
+        // 拿到目标div
+        const targetDiv = document.getElementById('div1')
+        // 距左边距的距离
+        let left = 0
+        // 使用setInterval
+        let timer = setInterval(() => {
+            if(left <= window.innerWidth - 150) {
+                targetDiv.style.marginLeft = left + 'px'
+                left++
+            } else {
+                clearInterval(timer)
+            }
+        }, 16)
+        // 设置的setInterval时间间隔是16ms。一般认为人眼能辨识的流畅动画为每秒60帧，这里16ms比(1000ms/60)帧略小一些，但是一般可仍为该动画是流畅的
+        // 在很多移动端动画性能优化时，一般使用16ms来进行节流处理连续触发的浏览器事件。例如对touchmove、scroll事件进行节流等。通过这种方式减少持续事件的触发频率，可以大大提升动画的流畅性
+    </script>
+</body>
+</html>
