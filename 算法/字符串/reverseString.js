@@ -9,7 +9,7 @@ const reverseString = (arr) => {
     }
 
     // 主逻辑
-        // 1. 直接首位替换
+        // 1. 直接首尾替换
     // for(let i = 0; i < arr.length/2; i++) {
     //     // 利用es6的解构赋值
     //     // [arr[i], arr[arr.length - i - 1]] = [arr[arr.length - i - 1], arr[i]]

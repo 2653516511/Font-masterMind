@@ -20,7 +20,7 @@ const reverse = (x) => {
     let res = x > 0 ? x : (0 - x)
     let rest = 0
     while(res > 0) {
-        // 接用欧几里得算法，从res的最后一位取值，并与rest拼接起来
+        // 直接用欧几里得算法，从res的最后一位取值，并与rest拼接起来
         rest = res % 10 + rest * 10
         // 剔除掉最后一位
         res = Math.floor(res / 10)
@@ -28,7 +28,7 @@ const reverse = (x) => {
     rest = x > 0 ? rest : -rest
 
     // 返回值 return {number} or 0
-    if(rest <= -(2**31) || rest >= 2**31 - 1) {
+    if(rest <= -(2**31) || rest >= 2**31 - 1) {         //或者为了性能可以直接写-21747483648
         // console.log(1);
         return 0
     }
