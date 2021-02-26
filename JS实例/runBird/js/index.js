@@ -10,6 +10,7 @@ img.src = 'img/bird.jpg'
 // imgSty.height = "30px"
 // console.log('img', img);
 
+
 // 动画
 let birdX = 20, birdY = 20, birdWidth = 30, birdHeight = 30
 let birdTime = null
@@ -42,7 +43,51 @@ img.onload = function() {
         // birdY = birdY - 30
     }
 
+    
+
+
+
 }
+
+
+// 柱子
+var columnArr = []
+var columnTimer = null
+function createColumn() {
+    columnTimer = setInterval(() => {
+        
+        var column = {}     //柱子容器
+        column.positionX = 500
+        column.positionY = -Math.round(Math.random()*100 + 100)
+        column.imgA = new Image()
+        column.imgB = new Image()
+        column.imgA.src = 'img/colUp.png'
+        column.imgB.src = 'img/colDown.png'
+        column.id = new Date().getTime()
+
+        // 将产生的柱子放入柱子数组中
+        columnArr.push(column)
+
+    }, 1500)
+    
+}
+createColumn()
+// 绘制柱子
+function drawColumn() {
+    console.log(columnArr);
+
+    for(let i = 0; i < columnArr.length; ++i) {
+        console.log(1);
+
+        columnArr[i].positionX--
+        context.drawImage(columnArr[i].imgA, columnArr[i].positionX, columnArr[i].positionY)
+        context.drawImage(columnArr[i].imgB, columnArr[i].positionX, columnArr[i].positionY + 350)
+    }
+}
+// setInterval(() => {
+    // drawColumn()
+// }, 2220);
+
 
 
 
