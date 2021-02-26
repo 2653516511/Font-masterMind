@@ -27,15 +27,34 @@ const rotateArray = (arr) => {
 
     // 主逻辑
         // 1. 利用旋转的四个节点进行交换
-    const len = arr.length      //数组的维度
-    for(let i = 0; i < len; i++) {
-        for(let j = i; j < len - i - 1; ++j) {
-            const temArr = [
-                arr[i][j], arr[i][len - i - 1],
-                arr[]
-            ]
+    // const len = arr.length      //数组的维度
+    // for(let i = 0; i < Math.floor(len / 2); i++) {
+    //     for(let j = 0; j < Math.floor((len + 1) / 2); ++j) {
+    //         const temArr = [
+    //             arr[i][j], arr[len - j - 1][i],
+    //             arr[len - i - 1][len - j - 1],
+    //             arr[j][len - i - 1]
+    //         ]
+    //         arr[i][j] = temArr[1]
+    //         arr[len - j - 1][i] = temArr[2]
+    //         arr[len - i - 1][len - j - 1] = temArr[3]
+    //         arr[j][len - i - 1] = temArr[0]
+    //     }
+    // }
+    // return arr
+
+        // 2. 直接第一行成为最后一列
+    const n = arr.length, m = arr[0].length
+    let res = new Array(m).fill(0).map(() => new Array(n).fill(0))
+    for(let i = 0; i < n; ++i){
+        for(let j = 0; j < m; ++j) {
+            // console.log(i, j, arr[i][j], res[j][n - i - 1]);
+            res[j][n - i - 1] = arr[i][j]
         }
     }
+    return res
 
     // 返回值 arr
 }
+let arr = [[1,2,3],[4,5,6],[7,8,9]]
+console.log(rotateArray(arr));
