@@ -58,3 +58,8 @@ const rotateArray = (arr) => {
 }
 let arr = [[1,2,3],[4,5,6],[7,8,9]]
 console.log(rotateArray(arr));
+
+/**
+ * 1. 时间复杂度O(n2); 空间复杂度O(1)
+ * 2. 时间复杂度O(n2); 空间复杂度O(n)
+ */
