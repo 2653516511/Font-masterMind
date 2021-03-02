@@ -18,13 +18,15 @@ new Promise((resolve, reject) => {
         console.log(2);
         // 这个resolve在宏任务中，所有后面的then只有执行到这一行 才会加入微任务队列中
         resolve('timer')
+        console.log(4)
     })
 }).then(e => {
     console.log(3);
     console.log(e);
 })
-// 1 4 5 2 3 timer
+// 1 4 5 2 3 timer 4
 ```
+resolve之后的程序还会继续执行，但是一般情况下不这样写
 
 ### 状态改变
 状态只要结束，就不会改变，如下例：
