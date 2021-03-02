@@ -170,3 +170,4 @@ Promise.race = function(promises) {
         }
     })
 }
+
