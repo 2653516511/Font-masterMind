@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+
+    <script>
+        /** 现在需要给li绑定事件
+         *      1. 使用for循环分别给每一个li绑定事件: 需要给每一个li都绑定事件，会造成性能的损耗
+         **/
+
+        const lis = document.getElementsByTagName('li')
+        // console.log(lis);
+        // for(let i = 0; i < lis.length; ++i) {
+        //     lis[i].addEventListener('click', () => {
+        //         console.log(lis[i].innerHTML, i);
+        //     })
+        // }
+        
+        /**
+         *      2. 只需要给父元素绑定事件即可
+         * **/
+        
+        const uls = document.querySelector('ul')
+        uls.addEventListener('click', function(e)  {
+            // console.log(e.target.tagName, e);
+            const target = e.target
+            // 为了严谨性，还是判断一下是否是li标签，因为可能还有别的标签
+            if(e.target.tagName.toLowerCase() === 'li') {
+                // 注意：这里的this是ul，但若改成箭头函数，this就为window了。需注意
+                // console.log(this);
+                const lis = this.getElementsByTagName('li')
+                // 拿到当前点击的target的索引
+                const index = Array.prototype.indexOf.call(lis, target)
+                console.log(lis[index].innerHTML, index);
+            }
+
+        })
+
+        
+        /**
+         * 已经给所有的按钮都添加了click事件，
+         * 有一个新的需求：给每一位访问的用户，banned = true 的标记，此用户点击任何任何按钮或元素，
+         *      都不响应，且alert一个提示
+         * **/
+        
+        // 全局在捕获阶段就阻止掉
+        window.addEventListener('click', function(e) {
+            // 为了严谨，即规定banned的类型，最好写成banned === true，而不是直接banned
+            if(banned === true) {
+                e.stopPropagation()
+            }
+        }, true)
+
+    </script>
+</body>
+</html>
