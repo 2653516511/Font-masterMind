@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- {{msg}} -->
+        <div class="slide-content">
+            <div class="slide-view">
+                <a v-for="(item, index) in slideList" :key="item.id">
+                    <img :src="item.img" v-show="index === number" 
+                        alt=""
+                        @mouseenter="clearChangeImg"
+                        @mouseleave="changeImg">
+                </a>
+                <span class="up-page" 
+                    @mouseenter="clearChangeImg"
+                    @mouseleave="changeImg"
+                    @click="clickPage('up')">
+                    ⬅
+                </span>
+                <span class="next-page"
+                    @mouseenter="clearChangeImg"
+                    @mouseleave="changeImg"
+                    @click="clickPage('down')">
+                    ➡
+                </span>
+                <ul class="slide-index">
+                    <li v-for="(v, i) in slideList" :key="v.id"
+                        :class="number === i ? 'active': ''"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: "swiper data msg",
+                slideList: [
+                    {"type":"1","img":"http://www.youdingsoft.com/fileUploadsmall/20180119172411843341.jpg;","url":""},
+                    {"type":"1","img":"http://www.youdingsoft.com/fileUploadsmall/20180119172434968049.jpg;","url":""},
+                    {"type":"1","img":"http://www.youdingsoft.com/fileUploadsmall/20180119172503906167.jpg;","url":""},
+                    {"type":"1","img":"http://www.youdingsoft.com/fileUploadsmall/20180119172518390352.jpg;","url":""},
+                    {"type":"1","img":"http://www.youdingsoft.com/fileUploadsmall/20180119172540250495.jpg;","url":""},
+                    {"type":"1","img":"http://www.youdingsoft.com/fileUploadsmall/20180119172552359735.jpg;","url":""}
+                ],
+                number: 0,
+                interid: null,
+            },
+            mounted() {
+              this.changeImg()  
+            },
+            methods: {
+                changeImg() {
+                    // let timer = null
+                    this.interid = setInterval(() => {
+                        this.number++
+                        if(this.number === this.slideList.length) {
+                            this.number = 0
+                        }
+                    }, 2000)
+                },
+                clearChangeImg() {
+                    clearInterval(this.interid)
+                },
+                clickPage(str) {
+                    if(str === 'up') {
+                        // this.number--
+                        if(this.number === 0) {
+                            this.number = this.slideList.length
+                        }
+                        this.number--
+                    }
+                    if(str === 'down') {
+                        // 如果是上一页，先判断是不是等于照片最大编辑数，若大于，则从最小的开始
+                        this.number++
+                        if(this.number === this.slideList.length) {
+                            this.number = 0
+                        }
+                        // this.number++
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
