@@ -61,7 +61,7 @@ const maxWater = (arr) => {
 const arr = [4,2,0,3,2,5]
 console.log(maxWater(arr));
 /**
- * 1. 时间复杂度O(n2); 空间复杂度O(n)
- * 2. 时间复杂度O(n); 空间复杂度O(n)
+ * 1. 时间复杂度O(n2); 空间复杂度O(1)
+ * 2. 时间复杂度O(n); 空间复杂度O(1)
  * 
  */
