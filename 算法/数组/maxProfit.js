@@ -20,7 +20,18 @@ const maxProfit = (arr = []) => {
 
     // 主逻辑
         // 1. 给定两个指针，从后向前 判断是否是递减的，满足则其中一个指针继续左移，否则计算差值，另一个指针换位置
-    
+    const len = arr.length
+    let pro = len - 2, fix = len - 1
+    let count = 0
+    while(pro >= 0) {
+        if(arr[pro] > arr[pro + 1]) {
+            count += arr[fix] - arr[pro + 1]
+            fix = pro
+        }
+        pro--
+    }
+    count += arr[fix] - arr[pro + 1]
+    return count
 
     // 返回值 number
 } 
