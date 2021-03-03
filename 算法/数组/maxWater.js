@@ -28,30 +28,51 @@ const maxWater = (arr) => {
 
         // 2. 思路不变，写法不同，时间复杂度不同
         // 将计算最大数最小数的程序提出来
-    const lrMinNum = function(nums1, nums2) {
-        // 边界条件
-        if(nums1.length === 0 && nums2.length === 0) {
-            return 0
-        }
-        // 主逻辑
-        // const res = Math.max(...nums)
-        let res = 0, res1 = 0, res2 = 0
-        for(let i = 0; i < nums1.length; ++i) {
-            res1 = Math.max(res1, nums1[i])
-        }
-        for(let j = 0; j < nums2.length; ++j) {
-            res2 = Math.max(res2, nums2[j])
-        }
+    // const lrMinNum = function(nums1, nums2) {
+    //     // 边界条件
+    //     if(nums1.length === 0 && nums2.length === 0) {
+    //         return 0
+    //     }
+    //     // 主逻辑
+    //     // const res = Math.max(...nums)
+    //     let res = 0, res1 = 0, res2 = 0
+    //     for(let i = 0; i < nums1.length; ++i) {
+    //         res1 = Math.max(res1, nums1[i])
+    //     }
+    //     for(let j = 0; j < nums2.length; ++j) {
+    //         res2 = Math.max(res2, nums2[j])
+    //     }
 
-        // 返回值 number
-        return res = Math.min(res1, res2)
-    }
-    let count = 0       //盛水总量
+    //     // 返回值 number
+    //     return res = Math.min(res1, res2)
+    // }
+    // let count = 0       //盛水总量
+    // const len = arr.length
+    // for(let i = 1; i < len; ++i) {
+    //     const temp = lrMinNum(arr.slice(0, i), arr.slice(i + 1))
+    //     if(temp - arr[i] > 0) {
+    //         count += temp - arr[i]
+    //     }
+    // }
+    // return count
+
+        // 3. 使用双指针
     const len = arr.length
-    for(let i = 1; i < len; ++i) {
-        const temp = lrMinNum(arr.slice(0, i), arr.slice(i + 1))
-        if(temp - arr[i] > 0) {
-            count += temp - arr[i]
+    let count = 0
+
+    let left = 0, right = len - 1
+    let l_max = arr[0], r_max = arr[len - 1]
+
+    while(left <= right) {
+        l_max = Math.max(l_max, arr[left])
+        r_max = Math.max(r_max, arr[right])
+
+        if(l_max < r_max) {
+            count += l_max - arr[left]
+            left++
+        } else {
+            count += r_max - arr[right]
+            right--
         }
     }
     return count
