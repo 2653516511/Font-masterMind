@@ -56,7 +56,7 @@ const maxWater = (arr) => {
     // }
     // return count
 
-        // 3. 使用双指针
+        // 3. 使用双指针, 最优解法
     const len = arr.length
     let count = 0
 
