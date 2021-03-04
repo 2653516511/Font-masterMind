@@ -142,6 +142,9 @@ Promise.all = function(promises) {
     
     // promises是一个数组
     return new Promise((resolve, reject) => {
+        if(!Array.isArray(promises)) {
+            return reject(new Error('Expected an array'))
+        }
         let count = 0, results = []
         for(let i = 0; i < promises.length; i++) {
             promises[i].then((v) => {
