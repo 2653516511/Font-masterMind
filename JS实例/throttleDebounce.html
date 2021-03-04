@@ -35,8 +35,9 @@
                     old = now
                 } else if(options.tail !== false) {
                     timer = setTimeout(() => {
+                        old = new Date().getTime()
                         fn.apply(_this, args)
-                        timer = null
+                        // timer = null
                     }, await)
                 }
             }
