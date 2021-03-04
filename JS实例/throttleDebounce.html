@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="">
+
+    <script>
+        const inputAr = document.querySelector('input')
+        // inputAr.addEventListener('input', debounce(inputEvent, 1000, true), false)
+        inputAr.addEventListener('input', throtte(inputEvent), 1000, {start: true, tail: true}, false)
+        let count = 0
+        function inputEvent() {
+            console.log(count++);
+        }
+        // 隔一段时间触发。首次是否触发 及 离开是否触发
+        function throtte(fn, await, options) {
+            if(Object.prototype.toString.call(fn) !== '[object Function]') {
+                return new Error('请输入一个函数')
+            }
+            var await = await || 1000, options = options || {}
+            let old = 0, timer = null
+            return function() {
+                clearTimeout(timer)
+                const _this = this, args = arguments
+                let now = new Date().getTime()
+                if(options.start === false && !old) {
+                    old = now
+                }
+                if(now - old >= await) {
+                    fn.apply(_this, args)
+                    old = now
+                } else if(options.tail !== false) {
+                    timer = setTimeout(() => {
+                        fn.apply(_this, args)
+                        timer = null
+                    }, await)
+                }
+            }
+        }
+        // 用户不操作时 规定的时间到了会触发。是否立即触发
+        function debounce(fn, wait, immediate) {
+            if(Object.prototype.toString.call(fn) !== '[object Function]') {
+                return new Error('请输入一个函数')
+            }
+            // console.log(1);
+            var wait = wait || 1000
+            let timer = null
+            return function() {
+                // console.log(2);
+                clearTimeout(timer)
+                const _this = this, args = arguments
+                if(immediate) {
+                    if(!timer) {
+                        fn.apply(_this, args)
+                    }
+                    timer = setTimeout(() => {
+                        timer = null
+                    }, wait);
+                } else {
+                    timer = setTimeout(() => {
+                        fn.apply(_this, args)
+                    }, wait)
+                }
+            }
+        }
+    </script>
+</body>
+</html>
