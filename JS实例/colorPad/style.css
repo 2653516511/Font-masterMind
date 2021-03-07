@@ -9,7 +9,7 @@ html body {
     /* 渐变：线性渐变、镜像渐变 */
     background-image: linear-gradient(to right, red, orange,yellow, green, blue, indigo, purple);
     /* 调用animation */
-    animation: filterAnimation 2s linear 0s infinite ;
+    /* animation: filterAnimation 2s linear 0s infinite ; */
 }
 
 .box {
