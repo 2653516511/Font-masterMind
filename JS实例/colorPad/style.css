@@ -1,0 +1,44 @@
+/* 清除默认样式 */
+* {
+    padding: 0;
+    margin: 0;
+}
+html body {
+    width: 100%;
+    height: 100%;
+    /* 渐变：线性渐变、镜像渐变 */
+    background-image: linear-gradient(to right, red, orange,yellow, green, blue, indigo, purple);
+    /* 调用animation */
+    animation: filterAnimation 2s linear 0s infinite ;
+}
+
+.box {
+    width: 500px;
+    height: 360px;
+    /* border: 2px solid black; */
+    margin: 20px auto;
+    /* position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-250px) translateY(-180px); */
+}
+.box main {
+    width: 300px;
+    height: 200px;
+    background-color: white;
+    /* margin-bottom: 20px; */
+    margin: 20px auto;
+}
+.box p {
+    margin-left: 20px;
+}
+
+/* c3新增动画 */
+@keyframes filterAnimation {
+    from {
+        filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
