@@ -1,1 +1,14 @@
 
+ul {
+    display: flex;
+    justify-content: center;
+}
+ul li {
+    width: 28px;
+    height: 27px;
+    list-style: none;
+    background: url(img/star.gif);
+}
+ul li.light {
+    background-position: 0 -29px
+}
