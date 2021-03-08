@@ -1,0 +1,176 @@
+/* 第一种方案 子元素高度可以设定也可以不设定*/
+.app{
+    width: 500px;
+    height: 500px;
+    background: greenyellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.app>div{
+    width: 100px;
+    height: 100px; 
+    font-size: 20px;
+    background: blueviolet;				
+} 
+/* 第二种方案 子元素高度可以设定也可以不设定*/
+.app{
+    width: 500px;
+    height: 500px;
+    background: greenyellow;
+    position: relative;
+    
+}
+.app>div{
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
+    background: blueviolet;	
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom:0;
+    margin: auto;
+} 
+/* 第三种方案 子元素高度可以设定也可以不设定*/
+.app{
+    width: 500px;
+    height: 500px;
+    background: greenyellow;
+    position: relative;
+    
+}
+.app>div{
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
+    background: blueviolet;	
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+/* 第四种方案 高度就是文字加line-height的高度 局限性在于必须里边的元素是inline否则不生效*/
+.app{
+    width: 500px;
+    height: 500px;
+    background: greenyellow;
+    line-height: 500px;
+    text-align: center;
+    
+}
+.app>div{
+    width: 100px;
+    font-size: 20px;
+    background: blueviolet;	
+    display: inline;				
+} 
+/* 第五种方案 横向利用margin auto，垂直还是利用定位和平移 也不用管里边元素的高度*/
+.app{
+    width: 500px;
+    height: 500px;
+    background: greenyellow;								
+}
+.app>div{
+    width: 100px;
+    
+    font-size: 20px;
+    background: blueviolet;	
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: auto;
+    margin-right:auto ;
+}
+/* 第六种方案 最不推荐的方案  通过计算padding 一旦内部元素改变了高度或者宽度，那就惨了*/
+.app{
+    width: 500px;
+    height: 500px;
+    background: greenyellow;
+    box-sizing: border-box;
+    padding-left: 200px;
+    padding-top: 200px;											
+}
+.app>div{
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
+    background: blueviolet;	
+    
+} 
+/* 第七中方案 本人没用过，但是确实能实现 ,原来盒子的背景颜色被子元素覆盖了，
+我又试着添加了元素。有点意思。有时间可以研究下 vertical-align我一直很拒绝。这个方法也是解决多行文字垂直居中*/
+.app{
+    width: 500px;
+    height: 500px;
+    background: greenyellow;
+    display: table;	
+    text-align: center;
+}
+.app>div{
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
+    background: blueviolet;	
+    display: table-cell;
+    vertical-align: middle;				
+} 
+/* 第八种方案 单行文本好居中 就是让文本的父元素的line-height和高度相同*/
+.app{
+    width: 500px;
+    height: 500px;
+    background: greenyellow;		
+    text-align: center;
+    line-height: 500px;
+}
+.app>div{
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
+    background: blueviolet;	
+    display: inline;			
+} 
+/* 第九种方案 多行文本垂直居中 这里就不水平居中了。，。
+除了歌词水平居中之外，其他这么的都不好看。
+两种方法：table法和不设高度法，我自己起的名字
+以下是table 法
+。*/
+.app{
+    width: 500px;
+    height: 500px;
+    background: greenyellow;		
+    display: table;
+}
+.app>div{
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
+    background: blueviolet;	
+    display: table-cell;
+    vertical-align: middle;
+} 
+/* 不设高度法,更简单 和其他的垂直居中一样，上代码就行 
+这个时候就实现多行文本居中了 然后至于换不换行加不加点就直接操作了
+还能操作显示几行等等
+这种方法的多行可操作强，否则小心后期难维护
+*/
+.app{
+    width: 500px;
+    height: 500px;
+    background: greenyellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.app>div{
+    width: 100px;
+    font-size: 20px;
+    background: blueviolet;	
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: pre-line; */
+ 
+}                   
