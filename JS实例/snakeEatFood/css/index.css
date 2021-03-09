@@ -1,0 +1,90 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+.content {
+    width: 620px;
+    height: 620px;
+    border: 2px solid yellow;
+    margin: 50px auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+.btn {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+.btn button {
+    /* button是input的标签，会有其本身的一些属性，需要给他关了 */
+    background: none;
+    border: none;
+
+    background-size: 100% 100%;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+.startBtn button{
+    width: 200px;
+    height: 100px;
+    background-image: url(../images/startGame.jpg);
+    
+    position: absolute;
+    margin-left: -100px;
+    margin-top: -50px;
+}
+.pauseBtn button{
+    width: 100px;
+    height: 100px;
+    background-image: url(../images/pauseGame.jpg);
+    /* filter: opacity(0.5); */
+    border: 5px solid rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+
+    position: absolute;
+    margin-left: -50px;
+    margin-top: -50px;
+}
+.pauseBtn {
+    display: none;
+}
+#snakeWrap {
+    width: 600px;
+    height: 600px;
+    background: #225675;
+    border: 2px solid 7dd9ff;
+
+    position: relative;
+}
+#snakeWrap div{
+    width: 20px;
+    height: 20px;
+}
+.snakeHead {
+    /* width: 20px;
+    height: 20px; */
+    background-image: url(../images/snakeHead.jpg);
+    background-size: cover;
+}
+.snakeBody {
+    /* width: 20px;
+    height: 20px; */
+    background-color: #9ddbb1;
+    border-radius: 50%;
+}
+.food {
+    background-image: url(../images/food.jpg);
+    background-size: cover;
+}
+
