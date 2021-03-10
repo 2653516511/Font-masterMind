@@ -49,8 +49,25 @@ function Snake() {
     // 蛇身上每个方块的位置
     this.pos = []
     
-    // 蛇走的方向
-    this.directionNum = {}
+    // 存储蛇走的方向
+    this.directionNum = {
+        left: {
+            x: -1,
+            y: 0
+        },
+        right: {
+            x: 1,
+            y: 0
+        },
+        up: {
+            x: 0,
+            y: -1
+        },
+        down: {
+            x: 0,
+            y: 1
+        }
+    }
 }
 Snake.prototype.init = function() {
     // 创建蛇头
@@ -79,6 +96,29 @@ Snake.prototype.init = function() {
 
     snakeTail.last = snakeBody1
     snakeTail.next = null
+
+    // 给蛇添加一条属性，用来表示蛇走de方向
+    this.direction = this.directionNum.right
 }
+
+// 获取蛇头下一个位置对应的元素
+Snake.prototype.getNextPos = function() {
+    let nextPos = [
+        this.head.x/sw + this.direction.x,
+        this.head.y/sh + this.direction.y
+    ]
+    // console.log(nextPos);
+
+    // 下一个点是自己，则game over
+
+    // 下一个点是围墙，则game over
+
+    // 下一个点是食物，则吃，然后继续走
+
+    // 下一个点什么都不是，继续走
+
+}
+
 let snake = new Snake()
 snake.init()
+snake.getNextPos()
