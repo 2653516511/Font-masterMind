@@ -53,9 +53,32 @@ function Snake() {
     this.directionNum = {}
 }
 Snake.prototype.init = function() {
-    // 
-    let snakeHead = new Square(3, 0, 'snakeHead')
+    // 创建蛇头
+    let snakeHead = new Square(2, 0, 'snakeHead')
+    this.head = snakeHead
     snakeHead.create()
+    this.pos.push([2, 0])
+
+    // 创建蛇身
+    let snakeBody1 = new Square(1, 0, 'snakeBody')
+    snakeBody1.create()
+    this.pos.push([1, 0])
+
+    // 创建蛇尾
+    let snakeTail = new Square(0,0, 'snakeBody')
+    this.tail = snakeTail
+    snakeTail.create()
+    this.pos.push([0,0])
+
+    // 形成链表关系
+    snakeHead.last = null
+    snakeHead.next = snakeBody1
+
+    snakeBody1.last = snakeHead
+    snakeBody1.next = snakeTail
+
+    snakeTail.last = snakeBody1
+    snakeTail.next = null
 }
 let snake = new Snake()
 snake.init()
