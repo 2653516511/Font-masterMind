@@ -98,7 +98,7 @@ Snake.prototype.init = function() {
     snakeTail.next = null
 
     // 给蛇添加一条属性，用来表示蛇走de方向
-    this.direction = this.directionNum.right
+    this.direction = this.directionNum.up
 }
 
 // 获取蛇头下一个位置对应的元素
@@ -107,16 +107,46 @@ Snake.prototype.getNextPos = function() {
         this.head.x/sw + this.direction.x,
         this.head.y/sh + this.direction.y
     ]
-    // console.log(nextPos);
+    console.log(nextPos);
 
-    // 下一个点是自己，则game over
+    // 下一个点是自己，则game over。 nextPos 在this.pos中存在
+    let selfCollied = false
+    this.pos.forEach((item, index, arr) => {
+        if(item[0] === nextPos[0] && item[1] === nextPos[1]) {
+            // 相等，即是撞上了
+            selfCollied = true
+        }
+    })
+    if(selfCollied === true) {
+        console.log('撞上了');
+        // 这里注意this的指向问题，不然die方法里面的this就指向了this.strategies，而不是Snake.prototype
+        this.strategies.die.call(this)
+        return
+    }
 
     // 下一个点是围墙，则game over
+    if(nextPos[0] < 0 || nextPos[1] < 0 || nextPos[0] > td -1 || nextPos[1] > tr -1) {
+        console.log('撞墙了');
+        this.strategies.die.call(this)
+        return
+    }
 
     // 下一个点是食物，则吃，然后继续走
+    // this.strategies.eat.call(this)
 
-    // 下一个点什么都不是，继续走
-
+    // 下一个点什么都不是，继续走。除了以上情况，就剩下这种情况了
+    this.strategies.move.call(this)
+}
+Snake.prototype.strategies = {
+    move: function() {
+        console.log('move');
+    },
+    die: function() {
+        console.log('die');
+    },
+    eat: function() {
+        console.log('eat');
+    }
 }
 
 let snake = new Snake()
