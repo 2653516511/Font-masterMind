@@ -184,12 +184,15 @@ Snake.prototype.strategies = {
     },
     die: function() {
         console.log('die');
+        game.over()
     },
     eat: function() {
         console.log('eat');
 
         this.strategies.move.call(this, true)
         createFood()
+        // 得分
+        game.score++
     }
 }
 
@@ -219,6 +222,7 @@ function createFood() {
     // 可以使用单例设计模式: 不用每次都创建，而是改变他的位置, 不需要remove他
     let hasFood = document.querySelector('.food')
     if(hasFood) {
+        // 已经有食物了，不需要移除它
         hasFood.style.top = y*sh + 'px'
         hasFood.style.left = x*sw + 'px'
     } else {
@@ -257,6 +261,25 @@ Game.prototype.start = function() {
         snake.getNextPos()
     }, 200)
 }
+Game.prototype.pause = function() {
+    clearInterval(this.timer)
+}
+Game.prototype.over = function() {
+    clearInterval(this.timer)
+    alert('your score is:' + this.score)
+
+    // 游戏回到开始的状态
+    let snakeWrap = document.querySelector('#snakeWrap')
+    snakeWrap.innerHTML = ''
+
+    // 同时清空所有的数据，即重新new一个
+    snake = new Snake()
+    game = new Game()
+
+    // 重新显示开始按钮
+    let startBtnWrap = document.querySelector('.startBtn')
+    startBtnWrap.style.display = 'block'
+}
 game = new Game()
 
 // 点击开始按钮，蛇开始走
@@ -265,4 +288,18 @@ startBtn.onclick = function() {
     this.parentNode.style.display = 'none'
     // 初始化game
     game.init()
+}
+
+// 暂停游戏
+// window.onclick = function() {}
+let contentClick = document.getElementById('snakeWrap')
+let pauseBtn = document.querySelector('.pauseBtn button')
+contentClick.onclick = function() {
+    game.pause()
+    pauseBtn.parentNode.style.display = 'block'
+}
+// 继续游戏
+pauseBtn.onclick = function() {
+    game.start()
+    pauseBtn.parentNode.style.display = 'none'
 }
