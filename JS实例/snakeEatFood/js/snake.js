@@ -49,7 +49,7 @@ Snake.prototype.init = function() {
     snakeTail.create()
     this.pos.push([0,0])
 
-    // 形成链表关系
+    // 作为一个整体。形成链表关系
     snakeHead.last = null
     snakeHead.next = snakeBody1
 
@@ -72,9 +72,9 @@ Snake.prototype.getNextPos = function() {
     ]
     // console.log(nextPos);
 
-    // 下一个点是自己，则game over。 nextPos 在this.pos中存在
+    // 1, 下一个点是自己，则game over。 nextPos 在this.pos中存在
     let selfCollied = false
-    console.log('pos', this.pos);
+    // console.log('pos', this.pos);
 
     this.pos.forEach((item, index, arr) => {
         // console.log('item', item);
@@ -84,25 +84,25 @@ Snake.prototype.getNextPos = function() {
         }
     })
     if(selfCollied === true) {
-        console.log('撞上了');
+        // console.log('撞上了');
         // 这里注意this的指向问题，不然die方法里面的this就指向了this.strategies，而不是Snake.prototype
         this.strategies.die.call(this)
         return
     }
 
-    // 下一个点是围墙，则game over
+    // 2, 下一个点是围墙，则game over
     if(nextPos[0] < 0 || nextPos[1] < 0 || nextPos[0] > td -1 || nextPos[1] > tr -1) {
-        console.log('撞墙了');
+        // console.log('撞墙了');
         this.strategies.die.call(this)
         return
     }
 
-    // 下一个点是食物，则吃，然后继续走
+    // 3, 下一个点是食物，则吃，然后继续走
     if(food && food.pos[0] === nextPos[0] && food.pos[1] === nextPos[1]) {
         this.strategies.eat.call(this)
     }
 
-    // 下一个点什么都不是，继续走。除了以上情况，就剩下这种情况了
+    // 4, 下一个点什么都不是，继续走。除了以上情况，就剩下这种情况了
     this.strategies.move.call(this)
 }
 Snake.prototype.strategies = {
@@ -140,12 +140,11 @@ Snake.prototype.strategies = {
 
     },
     die: function() {
-        console.log('die');
+        // console.log('die');
         game.over()
     },
     eat: function() {
-        console.log('eat');
-
+        // console.log('eat');
         this.strategies.move.call(this, true)
         createFood()
         // 得分
