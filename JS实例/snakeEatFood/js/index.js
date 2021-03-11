@@ -98,7 +98,7 @@ Snake.prototype.init = function() {
     snakeTail.next = null
 
     // 给蛇添加一条属性，用来表示蛇走de方向
-    this.direction = this.directionNum.up
+    this.direction = this.directionNum.right
 }
 
 // 获取蛇头下一个位置对应的元素
@@ -138,8 +138,37 @@ Snake.prototype.getNextPos = function() {
     this.strategies.move.call(this)
 }
 Snake.prototype.strategies = {
-    move: function() {
+    move: function(format) {
         console.log('move');
+
+        // 创建一个新方框放在旧蛇头的位置
+        let newBody = new Square(this.head.x/sw, this.head.y/sh, 'snakeBody')
+        // 修改链表
+        newBody.next = this.head.next
+        newBody.next.last = newBody
+        newBody.last = null
+        // 移除旧蛇头
+        this.head.remove()
+        newBody.create()
+
+        // 创建新蛇头
+        let newHead = new Square(this.head.x/sw + this.direction.x, this.head.y/sh + this.direction.y, 'snakeHead')
+        // 修改链表
+        newHead.next = newBody
+        newHead.last = null
+        newBody.last = newHead
+        newHead.create()
+
+        // 更新蛇身上的方框的坐标
+        this.pos.splice(0,0,this.head.x/sw + this.direction.x, this.head.y/sh + this.direction.y)
+        this.head = newHead
+        // 根据format判断是否是吃
+        if(!format) {   //format是false，则表示不吃, 则需要删除蛇尾并更新
+            this.tail.remove()
+            this.tail = this.tail.last
+            this.pos.pop()
+        }
+
     },
     die: function() {
         console.log('die');
