@@ -246,5 +246,11 @@ Game.prototype.start = function() {
     }, 200)
 }
 game = new Game()
-game.init()
 
+// 点击开始按钮，蛇开始走
+let startBtn = document.querySelector('.startBtn button')
+startBtn.onclick = function() {
+    this.parentNode.style.display = 'none'
+    // 初始化game
+    game.init()
+}
