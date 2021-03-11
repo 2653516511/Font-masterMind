@@ -141,7 +141,9 @@ Snake.prototype.getNextPos = function() {
     }
 
     // 下一个点是食物，则吃，然后继续走
-    // this.strategies.eat.call(this)
+    if(food && food.pos[0] === nextPos[0] && food.pos[1] === nextPos[1]) {
+        this.strategies.eat.call(this)
+    }
 
     // 下一个点什么都不是，继续走。除了以上情况，就剩下这种情况了
     this.strategies.move.call(this)
@@ -187,6 +189,7 @@ Snake.prototype.strategies = {
         console.log('eat');
 
         this.strategies.move.call(this, true)
+        createFood()
     }
 }
 
@@ -211,7 +214,16 @@ function createFood() {
     }
     
     food = new Square(x, y, 'food')
-    food.create()
+    // 存储食物的坐标
+    food.pos = [x, y]
+    // 可以使用单例设计模式: 不用每次都创建，而是改变他的位置, 不需要remove他
+    let hasFood = document.querySelector('.food')
+    if(hasFood) {
+        hasFood.style.top = y*sh + 'px'
+        hasFood.style.left = x*sw + 'px'
+    } else {
+        food.create()
+    }
 }
 // createFood()
 
