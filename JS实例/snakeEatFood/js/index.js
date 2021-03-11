@@ -3,6 +3,10 @@ let sw = 20,    //方框的宽度
     tr = 30,    //方框可移动的行数
     td = 30     //方框可移动的列数
 
+let snake = null,
+    food = null,
+    game = null
+
 // 方框构造函数
 function Square(x, y, className) {
     // 0,0      0,0
@@ -53,19 +57,23 @@ function Snake() {
     this.directionNum = {
         left: {
             x: -1,
-            y: 0
+            y: 0,
+            rotate: 180     //控制蛇头的旋转
         },
         right: {
             x: 1,
-            y: 0
+            y: 0,
+            rotate: 0
         },
         up: {
             x: 0,
-            y: -1
+            y: -1,
+            rotate: -90
         },
         down: {
             x: 0,
-            y: 1
+            y: 1,
+            rotate: 90
         }
     }
 }
@@ -103,6 +111,7 @@ Snake.prototype.init = function() {
 
 // 获取蛇头下一个位置对应的元素
 Snake.prototype.getNextPos = function() {
+    // 蛇头要走的下一个点的坐标
     let nextPos = [
         this.head.x/sw + this.direction.x,
         this.head.y/sh + this.direction.y
@@ -157,6 +166,7 @@ Snake.prototype.strategies = {
         newHead.next = newBody
         newHead.last = null
         newBody.last = newHead
+        newHead.viewContent.style.transform = 'rotate(' + this.direction.rotate + 'deg)'
         newHead.create()
 
         // 更新蛇身上的方框的坐标
@@ -175,9 +185,66 @@ Snake.prototype.strategies = {
     },
     eat: function() {
         console.log('eat');
+
+        this.strategies.move.call(this, true)
     }
 }
 
-let snake = new Snake()
-snake.init()
-snake.getNextPos()
+snake = new Snake()
+// snake.init()
+// snake.getNextPos()
+
+// 创建食物
+function createFood() {
+    // 食物不能在边框上，也不能在蛇身上
+    let x = Math.round(Math.random() * (td - 1))
+    let y = Math.round(Math.random() * (tr - 1))
+
+    let include = true      //判断是否继续循环，
+    while(include) {
+        snake.pos.forEach(item => {
+            if(item[0] !== x && item[1] !== y) {
+                // 证明不在蛇身上
+                include = false
+            }
+        })
+    }
+    
+    food = new Square(x, y, 'food')
+    food.create()
+}
+// createFood()
+
+// 游戏
+function Game() {
+    this.timer = null
+    this.score = 0
+}
+Game.prototype.init = function() {
+    // 蛇
+    snake.init()
+    // 食物
+    createFood()
+
+    document.onkeydown = function(nextKey) {
+        if(nextKey.which == 37 && snake.direction != snake.directionNum.right) {
+            snake.direction = snake.directionNum.left
+        } else if(nextKey.which == 38 && snake.direction != snake.directionNum.down) {
+            snake.direction = snake.directionNum.up
+        } else if(nextKey.which == 39 && snake.direction != snake.directionNum.left) {
+            snake.direction = snake.directionNum.right
+        } else if(nextKey.which == 40 && snake.direction != snake.directionNum.up) {
+            snake.direction = snake.directionNum.down
+        }
+    }
+    
+    this.start()
+}
+Game.prototype.start = function() {
+    this.timer = setInterval(() => {
+        snake.getNextPos()
+    }, 200)
+}
+game = new Game()
+game.init()
+
