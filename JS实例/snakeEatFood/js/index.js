@@ -245,11 +245,11 @@ Game.prototype.init = function() {
     document.onkeydown = function(nextKey) {
         if(nextKey.which == 37 && snake.direction != snake.directionNum.right) {
             snake.direction = snake.directionNum.left
-        } else if(nextKey.which == 38 && snake.direction != snake.directionNum.down) {
+        } else if(nextKey.keyCode == 38 && snake.direction != snake.directionNum.down) {
             snake.direction = snake.directionNum.up
         } else if(nextKey.which == 39 && snake.direction != snake.directionNum.left) {
             snake.direction = snake.directionNum.right
-        } else if(nextKey.which == 40 && snake.direction != snake.directionNum.up) {
+        } else if(nextKey.keyCode == 40 && snake.direction != snake.directionNum.up) {
             snake.direction = snake.directionNum.down
         }
     }
