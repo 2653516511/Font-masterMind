@@ -1,5 +1,6 @@
 import Config from "./Config.js"
 import Grass from "./Grass.js"
+import Tank from "./Tank.js"
 import Wall from "./Wall.js"
 import Water from "./Water.js"
 
@@ -28,6 +29,7 @@ export default class Game{
         }
         // console.log('map', this.map);
 // debugger
+
         // 随机生成水或者砖块
         // 约定好水和砖块的个数为50-200块, 所以生成50-200之间的随机数
         let count = Math.round(Math.random() * 150) + 50
@@ -55,6 +57,12 @@ export default class Game{
                 break
             }
         }
+
+        // 生成玩家的坦克
+        this.player = new Tank(13 * size, 11 * size)
+        // 不是把这一个方块渲染成坦克，而是给这个方块上加一层坦克
+        // this.map[13][11] = new Tank(13 * size, 11 * size)
+
     }
 
     // 循环画草地
@@ -68,5 +76,6 @@ export default class Game{
             })
             
         })
+        this.player.render(context)
     }
 }
