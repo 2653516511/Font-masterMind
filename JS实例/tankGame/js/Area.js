@@ -1,7 +1,7 @@
 
 // 使用类的概念，描述一个区域
 
-import Config from "./Config";
+import Config from "./Config.js";
 
 // 左上角的坐标，宽度和高度
 class Area {

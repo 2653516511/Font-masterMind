@@ -1,7 +1,7 @@
-import Config from "./Config";
+import Config from "./Config.js";
 
 export default class Block{
-    constructor(x = 0, y = 0, width = Config.blockSize, height = Config.blockSize, imgSrc = '/assets/grass.png') {
+    constructor(x = 0, y = 0, width = Config.blockSize, height = Config.blockSize, imgSrc = './assets/grass.png') {
         this.x = x
         this.y = y
         this.width = width
@@ -23,6 +23,7 @@ export default class Block{
     // 给方块对象，添加一个渲染的方法，使其可以出现在页面上
     render(context) {
         // context 对象是一个画笔对象
+        // 判断图片加载完成时，开始画
         if(this.isReady === true) {
             // context.drawImage(imageResource, dx, dy, dWidth, dHeight);
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
