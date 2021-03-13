@@ -14,9 +14,15 @@ export default class Block{
         // 定义一个状态，表示这个图片是否加载完成
         this.isReady = false
         this.image.onload = () => {
+            console.log(this);      //这里的this指向的是该Block类
             // 图片加载完成, 可以画了
             this.isReady = true
         }
+        // this.img.onload = function() {
+        //     console.log(this);          //这里的this指向的是image
+        //    this.isReady = true 
+        //    console.log(this.isReady);
+        // }
 
     }
 
