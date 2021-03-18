@@ -3,6 +3,17 @@
  * @param {*} ctx 
  */
 function myCall(ctx) {
-    var ctx = ctx || window
+    // 保存ctx
+    ctx = ctx ? Object(ctx) : window
+
+    ctx.origin = this
+    let arr = []
+    for(let i = 0; i < arguments.length; ++i) {
+        arr.push('arguments[' + i + ']')
+    }
+    let res = eval('ctx.origin(' + arr + ')')
+
+    delete ctx.origin
+    return res
     
 }
