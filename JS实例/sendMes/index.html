@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <div id="content"></div>
+        <p>
+            <span><input type="text" id="text"></span>
+            <span id="sendCon">发送</span>
+            <span id="hideCon">隐藏</span>
+            <span id="showCon">显示</span>
+        </p>
+    </div>
+    <div id="v">
+
+    </div>
+</body>
+<script></script>
+<script>
+    function $(id){
+        return document.getElementById(id)
+    }
+    // 
+    function sendMsg() {
+        let oSpan = document.createElement('span')
+        oSpan.innerHTML = $('text').value
+        $('content').appendChild(oSpan)
+        oSpan.style.top = Math.floor(Math.random()*280) + 'px'
+    }
+    // send message
+
+    // click send
+
+    // enter send
+
+    // hide: 将运动的消息隐藏 背景图片亮度增强
+
+    // show：弹幕继续向前运动 背景图片变模糊
+</script>
+</html>
