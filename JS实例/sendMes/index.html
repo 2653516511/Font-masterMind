@@ -53,7 +53,16 @@
         }
     }
     // hide: 将运动的消息隐藏 背景图片亮度增强
-
+    $('hideCon').onclick = function() {
+        $('content').style.opacity = '0'
+        // 兼容性
+        $('content').style.fill = 'alpha(opacity=0)'
+    }
     // show：弹幕继续向前运动 背景图片变模糊
+    $('showCon').onclick = function() {
+        $('content').style.opacity = '1'
+        // 兼容性
+        $('content').style.fill = 'alpha(opacity=1)'
+    }
 </script>
 </html>
