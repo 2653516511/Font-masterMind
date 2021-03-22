@@ -31,13 +31,27 @@
         oSpan.innerHTML = $('text').value
         $('content').appendChild(oSpan)
         oSpan.style.top = Math.floor(Math.random()*280) + 'px'
+
+        let oSpanWidth = oSpan.offsetWidth
+        startMove(oSpan, {'left':-oSpanWidth}, function() {
+            oSpan.remove()
+        })
+
+        $('text').value = ''
     }
     // send message
 
     // click send
-
+    $('sendCon').onclick = function() {
+        sendMsg()
+    }
     // enter send
-
+    document.onkeydown = function(e) {
+        var e = e || event
+        if(e.keyCode === 13) {
+            sendMsg()
+        }
+    }
     // hide: 将运动的消息隐藏 背景图片亮度增强
 
     // show：弹幕继续向前运动 背景图片变模糊
